@@ -37,6 +37,12 @@ export default function App() {
     setXIsNext((p) => !p);
   }
 
+  function restartGame() {
+    setBoard(Array(9).fill(null));
+    setXIsNext(true);
+  }
+
+
   return (
     <div className="page">
       <h1 className="title">Tic-Tac-Toe</h1>
@@ -44,7 +50,10 @@ export default function App() {
 
       <Board board={board} onCellClick={handleCellClick} winningLine={line} />
 
-      <button className="restart">Restart / New Game</button>
+      <button className="restart" onClick={restartGame}>
+        Restart / New Game
+      </button>
+
     </div>
   );
 }
