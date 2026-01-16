@@ -44,3 +44,8 @@
   background: #f5f5f5;
   cursor: pointer;
 }
+
+.cell.win {
+  outline: 4px solid #2ecc71;
+  box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.35);
+}
