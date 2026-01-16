@@ -9,6 +9,25 @@ export default function App() {
 
   const { winner, line } = useMemo(() => calculateWinner(board), [board]);
 
+    const isDraw = !winner && board.every((c) => c !== null);
+
+  const statusText = winner
+    ? `Winner: ${winner}`
+    : isDraw
+    ? "Draw!"
+    : `Next turn: ${xIsNext ? "X" : "O"}`;
+
+  function handleCellClick(index) {
+    if (winner || isDraw) return;
+    if (board[index]) return;
+
+    const next = board.slice();
+    next[index] = xIsNext ? "X" : "O";
+    setBoard(next);
+    setXIsNext((p) => !p);
+  }
+
+
   function handleCellClick(index) {
     // לוגיקה מלאה תבוא בקומיט הבא
     if (board[index]) return;
@@ -21,7 +40,7 @@ export default function App() {
   return (
     <div className="page">
       <h1 className="title">Tic-Tac-Toe</h1>
-      <div className="status">{`Next turn: ${xIsNext ? "X" : "O"}`}</div>
+      <div className="status">{statusText}</div>
 
       <Board board={board} onCellClick={handleCellClick} winningLine={line} />
 
